@@ -1,4 +1,4 @@
-package com.company;
+package com.sdn.graph;
 
 /**
  * Created by Md Mazharul Islam on 9/24/2016.
