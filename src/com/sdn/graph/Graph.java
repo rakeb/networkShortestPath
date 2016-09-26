@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Graph {
     List<Node> listOfNode;
 
-    List<Node> generateAdjListGraph(String filePath){
+    List<Node> generateAdjListGraph(String filePath) {
         Scanner sc = null;
         try {
             sc = new Scanner(new File(filePath));
@@ -46,63 +46,16 @@ public class Graph {
             }
 
 
-            //create
             sourceNode = getNode(sourceNodeId);
             destNode = getNode(destNodeId);
             sourceNodePortPair = new NodePortPair(destNode, sourcePort, destPort);
             destNodePortPair = new NodePortPair(sourceNode, destPort, sourcePort);
 
-            //i think sourceNode from listOfNode and sourceNode from new works as same. lets try
             sourceNode.insertNodePortPair(sourceNodePortPair);
             destNode.insertNodePortPair(destNodePortPair);
         }
         return this.listOfNode;
     }
-//    public Graph(String filePath) {
-//        Scanner sc = null;
-//        try {
-//            sc = new Scanner(new File(filePath));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        listOfNode = new ArrayList<Node>();
-//
-//        int sourceNodeId;
-//        int sourcePort;
-//        int destNodeId;
-//        int destPort;
-//        NodePortPair sourceNodePortPair, destNodePortPair;
-//        Node sourceNode = null, destNode = null;
-//
-//        while (sc.hasNext()) {
-//            sourceNodeId = sc.nextInt();
-//            sourcePort = sc.nextInt();
-//            destNodeId = sc.nextInt();
-//            destPort = sc.nextInt();
-//
-//            if (ifNodeNotExist(sourceNodeId)) {
-//                sourceNode = new Node(sourceNodeId);
-//                listOfNode.add(sourceNode);
-//            }
-//
-//            if (ifNodeNotExist(destNodeId)) {
-//                destNode = new Node(destNodeId);
-//                listOfNode.add(destNode);
-//            }
-//
-//
-//            //create
-//            sourceNode = getNode(sourceNodeId);
-//            destNode = getNode(destNodeId);
-//            sourceNodePortPair = new NodePortPair(destNode, sourcePort, destPort);
-//            destNodePortPair = new NodePortPair(sourceNode, destPort, sourcePort);
-//
-//            //i think sourceNode from listOfNode and sourceNode from new works as same. lets try
-//            sourceNode.insertNodePortPair(sourceNodePortPair);
-//            destNode.insertNodePortPair(destNodePortPair);
-//        }
-//    }
 
     boolean ifNodeNotExist(int nodeId) {
         for (Node node : listOfNode) {
@@ -121,10 +74,11 @@ public class Graph {
     }
 
     void printGraph(List<Node> listOfNode) {
-        for (Node node: listOfNode) {
+        System.out.println("printing path...");
+        for (Node node : listOfNode) {
             System.out.print(node.getNodeId() + " --> ");
-            for (NodePortPair nodePortPair: node.getNodePortPairList()){
-                System.out.print(nodePortPair.getNode().getNodeId() + "(" +nodePortPair.getSourcePort() +"." + nodePortPair.getDestPort()+ ") --> ");
+            for (NodePortPair nodePortPair : node.getNodePortPairList()) {
+                System.out.print(nodePortPair.getNode().getNodeId() + "(" + nodePortPair.getPortPair().getSourcePort() + "," + nodePortPair.getPortPair().getDestPort() + ") --> ");
             }
             System.out.println("null");
         }

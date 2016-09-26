@@ -9,12 +9,15 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String file = "C:\\Users\\Md Mazharul Islam\\IdeaProjects\\networkshortestpath\\resources\\network.txt";
         List<Node> adjGraph, path;
+
         Graph graph = new Graph();
         adjGraph = graph.generateAdjListGraph(file);
         graph.printGraph(adjGraph);
+
         Bfs bfs = new Bfs();
-        Node source = graph.getNode(0);
+        Node source = graph.getNode(1);
         Node dest = graph.getNode(4);
+
         path = bfs.findShortestPath(adjGraph, source, dest);
         bfs.printPath(path);
     }

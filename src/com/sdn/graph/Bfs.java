@@ -1,9 +1,9 @@
 package com.sdn.graph;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Created by Md Mazharul Islam on 9/26/2016.
@@ -11,12 +11,12 @@ import java.util.Queue;
 public class Bfs {
     private static int INFINITY = Integer.MAX_VALUE;
 
-    Queue<Node> queue;
-    List<Node> path;
+    private Queue<Node> queue;
+    private Stack<Node> path;
 
     public Bfs() {
         this.queue = new LinkedList<>();
-        this.path = new ArrayList<>();
+        path = new Stack<>();
     }
 
     public List<Node> findShortestPath(List<Node> adjListGraph, Node root, Node dest) {
@@ -54,15 +54,17 @@ public class Bfs {
         }
     }
 
-    public void printPath (List<Node> path) {
+    public void printPath(List<Node> path) {
         System.out.println("printing path...");
-        for (Node node: path) {
-            System.out.print(node.getNodeId() + " --> ");
-//            for (NodePortPair nodePortPair: node.getNodePortPairList()){
-//                System.out.print(nodePortPair.getNode().getNodeId() + "(" +nodePortPair.getSourcePort() +"." + nodePortPair.getDestPort()+ ") --> ");
-//            }
-//            System.out.println("null");
+        PortPair portPair;
+        for (int i = path.size(); i > 0; i--) {
+            System.out.print(path.get(i - 1).getNodeId() + " --> ");
+            if (i - 2 >= 0) {
+                portPair = Utilities.getConnectedNodesPortPair(path.get(i - 1), path.get(i - 2));
+                System.out.print("(" + portPair.getSourcePort() + "," + portPair.getDestPort() + ") ");
+            }
         }
         System.out.println("null");
     }
+
 }

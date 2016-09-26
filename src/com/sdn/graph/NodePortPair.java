@@ -5,13 +5,11 @@ package com.sdn.graph;
  */
 public class NodePortPair {
     private Node node;
-    private int sourcePort;
-    private int destPort;
+    PortPair portPair;
 
     public NodePortPair(Node node, int sourcePort, int destPort) {
         this.node = node;
-        this.sourcePort = sourcePort;
-        this.destPort = destPort;
+        this.portPair = new PortPair(sourcePort, destPort);
     }
 
     public Node getNode() {
@@ -22,19 +20,11 @@ public class NodePortPair {
         this.node = node;
     }
 
-    public int getSourcePort() {
-        return sourcePort;
+    public PortPair getPortPair() {
+        return portPair;
     }
 
-    public void setSourcePort(int sourcePort) {
-        this.sourcePort = sourcePort;
-    }
-
-    public int getDestPort() {
-        return destPort;
-    }
-
-    public void setDestPort(int destPort) {
-        this.destPort = destPort;
+    public void setPortPair(PortPair portPair) {
+        this.portPair = portPair;
     }
 }

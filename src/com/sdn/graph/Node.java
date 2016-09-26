@@ -2,7 +2,6 @@ package com.sdn.graph;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator;
 
 /**
  * Created by Md Mazharul Islam on 9/24/2016.
