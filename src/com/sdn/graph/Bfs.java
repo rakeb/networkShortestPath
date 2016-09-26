@@ -11,42 +11,58 @@ import java.util.Queue;
 public class Bfs {
     private static int INFINITY = Integer.MAX_VALUE;
 
-//    List<BfsNode> listOfBfsNode;
     Queue<Node> queue;
+    List<Node> path;
 
     public Bfs() {
-//        this.listOfBfsNode = new ArrayList<>();
         this.queue = new LinkedList<>();
+        this.path = new ArrayList<>();
     }
 
-    public void generateShortestPathWithBfs(List<Node> adjListGraph, Node source, Node dest) {
-//        convertNodeToBfsNode(adjListGraph);
-        BfsNode rootBfsNode = getBfsNode(source.getNodeId());
-        BfsNode destBfsNode = getBfsNode(dest.getNodeId());
-        rootBfsNode.setDistance(0);
-        queue.add(rootBfsNode);
+    public List<Node> findShortestPath(List<Node> adjListGraph, Node root, Node dest) {
+        generateShortestPathWithBfs(adjListGraph, root, dest);
+        path.add(dest);
+        Node goingToAdd = dest.getParent();
+        while (goingToAdd != null) {
+            path.add(goingToAdd);
+            goingToAdd = goingToAdd.getParent();
+        }
+        return path;
+    }
 
-        BfsNode current;
+    private void generateShortestPathWithBfs(List<Node> adjListGraph, Node root, Node dest) {
+        for (Node node : adjListGraph) {
+            node.setDistance(INFINITY);
+            node.setParent(null);
+        }
+
+        root.setDistance(0);
+        queue.add(root);
         while (!queue.isEmpty()) {
-            current = queue.remove();
-            for(BfsNode n : current.getNodePortPairList())
+            Node current = queue.remove();
+            for (NodePortPair nodePortPair : current.getNodePortPairList()) {
+                Node n = nodePortPair.getNode();
+                if (n.getDistance() == INFINITY) {
+                    n.setDistance(current.getDistance() + 1);
+                    n.setParent(current);
+                    queue.add(n);
+                }
+                if (n.getNodeId() == dest.getNodeId()) {
+                    return;
+                }
+            }
         }
     }
 
-//    private void convertNodeToBfsNode(List<Node> adjListGraph) {
-//        for (Node node : adjListGraph) {
-//            BfsNode bfsNode =  new BfsNode(node);
-//            bfsNode.setDistance(0);
-//            bfsNode.setParent(null);
-//            this.listOfBfsNode.add(bfsNode);
-//        }
-//    }
-
-    BfsNode getBfsNode(int nodeId) {
-        for (BfsNode bfsNode : listOfBfsNode) {
-            if (bfsNode.getNodeId() == nodeId)
-                return bfsNode;
+    public void printPath (List<Node> path) {
+        System.out.println("printing path...");
+        for (Node node: path) {
+            System.out.print(node.getNodeId() + " --> ");
+//            for (NodePortPair nodePortPair: node.getNodePortPairList()){
+//                System.out.print(nodePortPair.getNode().getNodeId() + "(" +nodePortPair.getSourcePort() +"." + nodePortPair.getDestPort()+ ") --> ");
+//            }
+//            System.out.println("null");
         }
-        return null;
+        System.out.println("null");
     }
 }

@@ -120,11 +120,11 @@ public class Graph {
         return null;
     }
 
-    void printGraph() {
+    void printGraph(List<Node> listOfNode) {
         for (Node node: listOfNode) {
             System.out.print(node.getNodeId() + " --> ");
             for (NodePortPair nodePortPair: node.getNodePortPairList()){
-                System.out.print(nodePortPair.node.getNodeId() + "(" +nodePortPair.sourcePort +"." + nodePortPair.destPort+ ") --> ");
+                System.out.print(nodePortPair.getNode().getNodeId() + "(" +nodePortPair.getSourcePort() +"." + nodePortPair.getDestPort()+ ") --> ");
             }
             System.out.println("null");
         }
