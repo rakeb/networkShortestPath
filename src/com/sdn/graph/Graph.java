@@ -74,7 +74,7 @@ public class Graph {
     }
 
     void printGraph(List<Node> listOfNode) {
-        System.out.println("printing path...");
+        System.out.println("printing Graph...");
         for (Node node : listOfNode) {
             System.out.print(node.getNodeId() + " --> ");
             for (NodePortPair nodePortPair : node.getNodePortPairList()) {
