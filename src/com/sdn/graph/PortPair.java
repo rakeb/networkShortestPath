@@ -7,9 +7,6 @@ public class PortPair {
     private int sourcePort;
     private int destPort;
 
-    public PortPair() {
-    }
-
     public PortPair(int sourcePort, int destPort) {
         this.sourcePort = sourcePort;
         this.destPort = destPort;
